@@ -119,7 +119,7 @@ describe("DELETE /todos/:id", () => {
                     return done(err);
                 }
                 Todo.findById(hexId).then((todo) => {
-                    expect(todo).not.toBeTruthy();
+                    expect(todo).toBeFalsy();
                     // toNotExist() has been deprecated.
                     done();
                 }).catch((e) => done(e));
@@ -210,8 +210,8 @@ describe('PATCH /todos/:id', () => {
             .expect(200)
             .expect((res) => {
                 expect(res.body.todo.text).toBe(text);
-                expect(res.body.todo.completed).not.toBeTruthy();
-                expect(res.body.todo.completedAt).toBeNull();
+                expect(res.body.todo.completed).toBeFalsy();
+                expect(res.body.todo.completedAt).toBeFalsy();
             })
             .end(done);
     });
